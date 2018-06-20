@@ -16,6 +16,7 @@
 
 package com.example.android.android_me.ui;
 
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -28,5 +29,17 @@ public class AndroidMeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_android_me);
+
+        //Use BodyPartFragement instance and display it using the Fragement Manager
+        BodyPartFragment headFragement = new BodyPartFragment();
+
+        //Use a FragementManager and transaction to add the fragement to the screen
+        FragmentManager fragementManager = getSupportFragmentManager();
+
+        //Fragment transaction
+        fragementManager.beginTransaction()
+                .add(R.id.head_containter, headFragement)
+                .commit();
     }
+
 }
