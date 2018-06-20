@@ -18,6 +18,7 @@ package com.example.android.android_me.ui;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,12 +27,26 @@ import android.widget.ImageView;
 import com.example.android.android_me.R;
 import com.example.android.android_me.data.AndroidImageAssets;
 
+import java.util.List;
+
 public class BodyPartFragment extends Fragment {
 
-    // TODO (1) Create a setter method and class variable to set and store of a list of image resources
+    private static final String TAG = BodyPartFragment.class.getSimpleName();
 
-    // TODO (2) Create another setter method and variable to track and set the index of the list item to display
+    // TODO/COMPLETED (1) Create a setter method and class variable to set and store of a list of image resources
+    List<Integer> mImageIds;
+
+    public void setmImageIds(List<Integer> mImageIds) {
+        this.mImageIds = mImageIds;
+    }
+
+    // TODO/COMPLETED (2) Create another setter method and variable to track and set the index of the list item to display
         // ex. index = 0 is the first image id in the given list , index 1 is the second, and so on
+    int mImageIndex;
+
+    public void setmImageIndex(int mImageIndex) {
+        this.mImageIndex = mImageIndex;
+    }
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the fragment
@@ -51,11 +66,15 @@ public class BodyPartFragment extends Fragment {
         // Get a reference to the ImageView in the fragment layout
         ImageView imageView = (ImageView) rootView.findViewById(R.id.body_part_image_view);
 
-        // Set the image to the first in our list of head images
-        imageView.setImageResource(AndroidImageAssets.getHeads().get(0));
-
-        // TODO (3) If a list of image ids exists, set the image resource to the correct item in that list
+        // TODO/COMPLETED (3) If a list of image ids exists, set the image resource to the correct item in that list
         // Otherwise, create a Log statement that indicates that the list was not found
+        if (mImageIds != null) {
+            // Set the image resource to the list item at the stored index
+            imageView.setImageResource(mImageIds.get(mImageIndex));
+        } else {
+            // Log a message saying the image id list is null
+            Log.v(TAG, "This fragment has a null list of image id's");
+        }
 
         // Return the rootView
         return rootView;
